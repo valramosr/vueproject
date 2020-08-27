@@ -1,19 +1,65 @@
 {
+  "professores": [
+    {
+      "id": 1,
+      "nome": "João"
+    },
+    {
+      "id": 2,
+      "nome": "Marcelo"
+    },
+    {
+      "id": 3,
+      "nome": "Antônio"
+    }
+  ],
   "alunos": [
     {
       "id": 1,
       "nome": "Valdemi",
-      "sobrenome": "Albuquerque"
+      "sobrenome": "Ramos",
+      "dataNasc": "18/09/1971",
+      "professor": {
+        "id": 2,
+        "nome": "Marcelo"
+      }
     },
     {
       "id": 2,
       "nome": "Rose",
-      "sobrenome": "Caraciolo"
+      "sobrenome": "Caraciolo",
+      "professor": {
+        "id": 2,
+        "nome": "Marcelo"
+      }
     },
     {
       "id": 3,
       "nome": "Ramos",
-      "sobrenome": "Albuquerque"
+      "sobrenome": "Albuquerque",
+      "professor": {
+        "id": 1,
+        "nome": "João"
+      }
+    },
+    {
+      "nome": "Alex",
+      "sonbrenome": "",
+      "professor": {
+        "id": 3,
+        "nome": "Antônio"
+      },
+      "id": 4
+    },
+    {
+      "id": 5,
+      "nome": "Teste de Aluno",
+      "sobrenome": "Tasdasda",
+      "dataNasc": "25/05/2001",
+      "professor": {
+        "id": 1,
+        "nome": "João"
+      }
     }
   ]
 }
