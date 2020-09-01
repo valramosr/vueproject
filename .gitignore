@@ -22,3 +22,7 @@ pnpm-debug.log*
 *.sln
 *.sw?
 node_modules
+
+#aquivos pastas que não vao subir
+bin
+obj
