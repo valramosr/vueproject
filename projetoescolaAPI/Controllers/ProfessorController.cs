@@ -8,36 +8,20 @@ namespace projetoescolaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlunoController : Controller
+    public class ProfessorController : Controller
     {
         public IRepository _repo { get; }
-        public AlunoController(IRepository repo)
+        public ProfessorController(IRepository repo)
         {
             _repo = repo;
 
         }
-
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var result = await _repo.GetAllAlunosAsync(true);
-                return Ok(result);
-            }
-            catch (System.Exception)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Conexão com o Banco de Dados Falhou!");
-            }
-
-        }
-
-        [HttpGet("{AlunoId}")]
-        public async Task<IActionResult> GetByAlunoId(int AlunoId)
-        {
-            try
-            {
-                var result = await _repo.GetAllAlunosAsyncById(AlunoId, true);
+               var result = await _repo.GetAllProfessoresAsync(true);
                 return Ok(result);
             }
             catch (System.Exception)
@@ -46,12 +30,12 @@ namespace projetoescolaAPI.Controllers
             }
         }
 
-        [HttpGet("ByProfessor/{ProfessorId}")]
+        [HttpGet("{ProfessorId}")]
         public async Task<IActionResult> GetByProfessorId(int ProfessorId)
         {
             try
             {
-                var result = await _repo.GetAllAlunosAsyncByProfessorId(ProfessorId, true);
+               var result = await _repo.GetAllProfessoresById(ProfessorId, true);
                 return Ok(result);
             }
             catch (System.Exception)
@@ -61,7 +45,7 @@ namespace projetoescolaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Aluno model)
+        public async Task<IActionResult> Post(Professor model)
         {
             try
             {
@@ -69,7 +53,7 @@ namespace projetoescolaAPI.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/aluno/{model.Id}", model);
+                    return Created($"/api/Professor/{model.Id}", model);
                 }
 
             }
@@ -80,49 +64,47 @@ namespace projetoescolaAPI.Controllers
 
             return BadRequest();
         }
-        [HttpPut("{AlunoId}")]
-        public async Task<IActionResult> Put(int AlunoId, Aluno model)
+        [HttpPut("{ProfessorId}")]
+        public async Task<IActionResult> Put(int ProfessorId, Professor model)
         {
             try
             {
-                var aluno = await _repo.GetAllAlunosAsyncById(AlunoId, false);
-                if (aluno == null) return NotFound();
+                var professor = await _repo.GetAllProfessoresById(ProfessorId, false);
+                if (professor == null) return NotFound();
 
                 _repo.Update(model);
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    aluno = await _repo.GetAllAlunosAsyncById(AlunoId, true);
-                    return Created($"/api/aluno/{model.Id}", aluno);
+                   return Created($"/api/Professor/{model.Id}", model);
                 }
             }
             catch (System.Exception)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Conexão com o Banco de Dados Falhou!");
             }
-
             return BadRequest();
         }
-        [HttpDelete("{AlunoId}")]
-        public async Task<IActionResult> Delete(int AlunoId)
+        [HttpDelete("{ProfessorId}")]
+        public async Task<IActionResult> Delete(int ProfessorId)
         {
             try
             {
-                var aluno = await _repo.GetAllAlunosAsyncById(AlunoId, false);
-                if (aluno == null) return NotFound();
+               var professor = await _repo.GetAllProfessoresById(ProfessorId, false);
+                if (professor == null) return NotFound();
 
-                _repo.Delete(aluno);
+                _repo.Delete(professor);
 
                 if (await _repo.SaveChangesAsync()){
                         return Ok();
                 }
-               
-            }   
+            }
             catch (System.Exception)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Conexão com o Banco de Dados Falhou!");
             }
             return BadRequest();
         }
+
     }
 }
